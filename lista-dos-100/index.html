@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista dos 100 - Metas de Casal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ==================== AUTH PAGES ==================== -->
+    <div id="auth-page" class="page active">
+        <div class="auth-container">
+            <div class="auth-brand">
+                <div class="auth-logo">💑</div>
+                <h1>Lista dos 100</h1>
+                <p class="auth-subtitle">100 metas, 1 só amor</p>
+            </div>
+
+            <!-- Login Form -->
+            <div id="login-form" class="auth-form active">
+                <h2>Entrar</h2>
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" placeholder="seu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Senha</label>
+                    <div class="password-input">
+                        <input type="password" id="login-password" placeholder="Sua senha" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('login-password')">👁</button>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-full" onclick="handleLogin()">Entrar</button>
+                <button class="btn btn-google btn-full" onclick="handleGoogleLogin()">
+                    <svg viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                    Entrar com Google
+                </button>
+                <div class="auth-links">
+                    <a href="#" onclick="showAuthForm('register-form')">Criar uma conta</a>
+                    <a href="#" onclick="showAuthForm('forgot-form')">Esqueci minha senha</a>
+                </div>
+            </div>
+
+            <!-- Register Form -->
+            <div id="register-form" class="auth-form">
+                <h2>Criar Conta</h2>
+                <div class="form-group">
+                    <label for="register-name">Nome</label>
+                    <input type="text" id="register-name" placeholder="Seu nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" placeholder="seu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Senha</label>
+                    <div class="password-input">
+                        <input type="password" id="register-password" placeholder="Mínimo 6 caracteres" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword('register-password')">👁</button>
+                    </div>
+                    <div class="password-strength" id="password-strength"></div>
+                </div>
+                <div class="form-group">
+                    <label for="register-password-confirm">Confirmar Senha</label>
+                    <input type="password" id="register-password-confirm" placeholder="Repita a senha" required>
+                </div>
+                <button class="btn btn-primary btn-full" onclick="handleRegister()">Criar Conta</button>
+                <button class="btn btn-google btn-full" onclick="handleGoogleLogin()">
+                    <svg viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                    Cadastrar com Google
+                </button>
+                <div class="auth-links">
+                    <a href="#" onclick="showAuthForm('login-form')">Já tenho uma conta</a>
+                </div>
+            </div>
+
+            <!-- Forgot Password Form -->
+            <div id="forgot-form" class="auth-form">
+                <h2>Recuperar Senha</h2>
+                <p class="form-description">Informe seu email e enviaremos instruções para redefinir sua senha.</p>
+                <div class="form-group">
+                    <label for="forgot-email">Email</label>
+                    <input type="email" id="forgot-email" placeholder="seu@email.com" required>
+                </div>
+                <button class="btn btn-primary btn-full" onclick="handleForgotPassword()">Enviar Instruções</button>
+                <div class="auth-links">
+                    <a href="#" onclick="showAuthForm('login-form')">Voltar ao login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== ONBOARDING PAGE ==================== -->
+    <div id="onboarding-page" class="page">
+        <div class="onboarding-container">
+            <div class="auth-brand">
+                <div class="auth-logo">💑</div>
+                <h1>Bem-vindo à Lista dos 100!</h1>
+            </div>
+
+            <div id="onboarding-choice" class="onboarding-step active">
+                <p class="onboarding-text">Você é o primeiro do casal ou recebeu um convite?</p>
+                <div class="onboarding-options">
+                    <button class="btn btn-outline btn-lg" onclick="showOnboardingStep('create-couple')">
+                        <span class="btn-icon">🎉</span>
+                        Sou o primeiro! Criar um convite
+                    </button>
+                    <button class="btn btn-outline btn-lg" onclick="showOnboardingStep('join-couple')">
+                        <span class="btn-icon">💌</span>
+                        Recebi um código de convite
+                    </button>
+                </div>
+            </div>
+
+            <div id="create-couple" class="onboarding-step">
+                <h2>Seu Código de Convite</h2>
+                <p class="onboarding-text">Compartilhe este código com seu par para que ele(a) se junte a você!</p>
+                <div class="invite-code-display">
+                    <span id="invite-code-text"></span>
+                    <button class="btn btn-icon-only" onclick="copyInviteCode()" title="Copiar código">📋</button>
+                </div>
+                <button class="btn btn-primary" onclick="shareInviteCode()">Compartilhar Link</button>
+                <p class="onboarding-hint">Enquanto espera, você já pode começar a adicionar metas!</p>
+                <button class="btn btn-secondary" onclick="skipOnboarding()">Começar a usar</button>
+            </div>
+
+            <div id="join-couple" class="onboarding-step">
+                <h2>Inserir Código de Convite</h2>
+                <p class="onboarding-text">Digite o código que você recebeu do seu par.</p>
+                <div class="form-group">
+                    <input type="text" id="invite-code-input" placeholder="Ex: ABC123" maxlength="6" class="invite-input" style="text-transform:uppercase">
+                </div>
+                <button class="btn btn-primary" onclick="handleJoinCouple()">Conectar</button>
+                <div class="auth-links">
+                    <a href="#" onclick="showOnboardingStep('onboarding-choice')">Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MAIN APP ==================== -->
+    <div id="app-page" class="page">
+        <!-- Top Navigation -->
+        <header class="app-header">
+            <div class="header-left">
+                <button class="btn btn-icon-only mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+                <div class="header-brand">
+                    <span class="header-logo">💑</span>
+                    <span class="header-title">Lista dos 100</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="header-level" id="header-level-badge" title="Nível do casal">
+                    <span class="level-icon">⭐</span>
+                    <span id="header-level-text">Nível 1</span>
+                </div>
+                <button class="btn btn-icon-only notification-btn" onclick="toggleNotifications()" id="notification-bell">
+                    🔔
+                    <span class="notification-badge" id="notification-count" style="display:none">0</span>
+                </button>
+                <div class="header-avatar" onclick="navigateTo('settings')">
+                    <span id="header-avatar-text">U</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Notification Panel -->
+        <div class="notification-panel" id="notification-panel">
+            <div class="notification-header">
+                <h3>Notificações</h3>
+                <button class="btn btn-sm" onclick="clearNotifications()">Limpar tudo</button>
+            </div>
+            <div class="notification-list" id="notification-list">
+                <p class="empty-state-small">Nenhuma notificação</p>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-nav">
+                <a class="nav-item active" data-page="dashboard" onclick="navigateTo('dashboard')">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">Dashboard</span>
+                </a>
+                <a class="nav-item" data-page="goals" onclick="navigateTo('goals')">
+                    <span class="nav-icon">🎯</span>
+                    <span class="nav-label">Metas</span>
+                </a>
+                <a class="nav-item" data-page="suggestions" onclick="navigateTo('suggestions')">
+                    <span class="nav-icon">💡</span>
+                    <span class="nav-label">Sugestões</span>
+                </a>
+                <a class="nav-item" data-page="achievements" onclick="navigateTo('achievements')">
+                    <span class="nav-icon">🏆</span>
+                    <span class="nav-label">Conquistas</span>
+                </a>
+                <a class="nav-item" data-page="settings" onclick="navigateTo('settings')">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-label">Configurações</span>
+                </a>
+            </div>
+            <div class="sidebar-footer">
+                <button class="btn btn-sm btn-outline" onclick="handleLogout()">Sair</button>
+            </div>
+        </nav>
+
+        <!-- Sidebar Overlay for mobile -->
+        <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- ===== DASHBOARD ===== -->
+            <section id="section-dashboard" class="content-section active">
+                <div class="section-header">
+                    <h2>Dashboard</h2>
+                    <p class="couple-greeting" id="couple-greeting">Olá, Casal!</p>
+                </div>
+
+                <div class="dashboard-grid">
+                    <!-- Progress Card -->
+                    <div class="dash-card dash-progress">
+                        <h3>Progresso Geral</h3>
+                        <div class="progress-circle-container">
+                            <div class="progress-circle" id="main-progress-circle">
+                                <svg viewBox="0 0 120 120">
+                                    <circle class="progress-bg" cx="60" cy="60" r="54"/>
+                                    <circle class="progress-fill" cx="60" cy="60" r="54" id="progress-circle-fill"/>
+                                </svg>
+                                <div class="progress-circle-text">
+                                    <span class="progress-number" id="progress-completed">0</span>
+                                    <span class="progress-label">de 100</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="progress-subtitle" id="progress-subtitle">Metas concluídas</p>
+                    </div>
+
+                    <!-- XP & Level Card -->
+                    <div class="dash-card dash-xp">
+                        <h3>Status do Casal</h3>
+                        <div class="level-display">
+                            <span class="level-badge" id="dash-level-badge">⭐ Nível 1</span>
+                            <span class="level-title" id="dash-level-title">Casal Sonhador</span>
+                        </div>
+                        <div class="xp-bar-container">
+                            <div class="xp-bar">
+                                <div class="xp-fill" id="xp-fill" style="width:0%"></div>
+                            </div>
+                            <div class="xp-info">
+                                <span id="xp-current">0 XP</span>
+                                <span id="xp-next">100 XP</span>
+                            </div>
+                        </div>
+                        <div class="xp-total">Total: <strong id="xp-total-value">0 XP</strong></div>
+                    </div>
+
+                    <!-- Upcoming Goals -->
+                    <div class="dash-card dash-upcoming">
+                        <h3>Próximas Metas</h3>
+                        <div class="mini-goal-list" id="upcoming-goals">
+                            <p class="empty-state-small">Nenhuma meta com data-alvo</p>
+                        </div>
+                    </div>
+
+                    <!-- In Progress Goals -->
+                    <div class="dash-card dash-in-progress">
+                        <h3>Em Andamento</h3>
+                        <div class="mini-goal-list" id="in-progress-goals">
+                            <p class="empty-state-small">Nenhuma meta em andamento</p>
+                        </div>
+                    </div>
+
+                    <!-- Category Chart -->
+                    <div class="dash-card dash-chart">
+                        <h3>Metas por Categoria</h3>
+                        <canvas id="category-chart" width="300" height="300"></canvas>
+                        <div id="chart-legend" class="chart-legend"></div>
+                        <p class="empty-state-small" id="chart-empty">Adicione metas para ver o gráfico</p>
+                    </div>
+
+                    <!-- Recent Achievements -->
+                    <div class="dash-card dash-achievements">
+                        <h3>Conquistas Recentes</h3>
+                        <div class="mini-achievement-list" id="recent-achievements">
+                            <p class="empty-state-small">Nenhuma conquista ainda</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== GOALS ===== -->
+            <section id="section-goals" class="content-section">
+                <div class="section-header">
+                    <div class="section-header-top">
+                        <h2>Metas</h2>
+                        <button class="btn btn-primary" onclick="openGoalModal()">+ Nova Meta</button>
+                    </div>
+                    <div class="goals-toolbar">
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="goal-search" placeholder="Buscar metas..." oninput="filterGoals()">
+                        </div>
+                        <div class="filter-group">
+                            <select id="filter-category" onchange="filterGoals()">
+                                <option value="">Todas as categorias</option>
+                            </select>
+                            <select id="filter-responsible" onchange="filterGoals()">
+                                <option value="">Todos</option>
+                                <option value="ele">Ele</option>
+                                <option value="ela">Ela</option>
+                                <option value="nos">Nós</option>
+                            </select>
+                            <select id="filter-status" onchange="filterGoals()">
+                                <option value="">Todos os status</option>
+                                <option value="todo">A Fazer</option>
+                                <option value="doing">Em Andamento</option>
+                                <option value="done">Concluídas</option>
+                            </select>
+                        </div>
+                        <div class="view-toggle">
+                            <button class="view-btn active" data-view="list" onclick="setGoalView('list')" title="Lista">☰</button>
+                            <button class="view-btn" data-view="grid" onclick="setGoalView('grid')" title="Grade">▦</button>
+                            <button class="view-btn" data-view="kanban" onclick="setGoalView('kanban')" title="Kanban">◫</button>
+                            <button class="view-btn" data-view="calendar" onclick="setGoalView('calendar')" title="Calendário">📅</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Goal Count -->
+                <div class="goal-count" id="goal-count">0 metas</div>
+
+                <!-- List View -->
+                <div id="view-list" class="goal-view active">
+                    <div class="goal-list-header">
+                        <span class="gl-title">Meta</span>
+                        <span class="gl-category">Categoria</span>
+                        <span class="gl-responsible">Responsável</span>
+                        <span class="gl-progress">Progresso</span>
+                        <span class="gl-actions">Ações</span>
+                    </div>
+                    <div class="goal-list-body" id="goal-list-body"></div>
+                </div>
+
+                <!-- Grid View -->
+                <div id="view-grid" class="goal-view">
+                    <div class="goal-grid" id="goal-grid-body"></div>
+                </div>
+
+                <!-- Kanban View -->
+                <div id="view-kanban" class="goal-view">
+                    <div class="kanban-board">
+                        <div class="kanban-column" data-status="todo">
+                            <div class="kanban-column-header">
+                                <h3>A Fazer</h3>
+                                <span class="kanban-count" id="kanban-todo-count">0</span>
+                            </div>
+                            <div class="kanban-cards" id="kanban-todo" ondrop="handleKanbanDrop(event, 'todo')" ondragover="handleKanbanDragOver(event)"></div>
+                        </div>
+                        <div class="kanban-column" data-status="doing">
+                            <div class="kanban-column-header">
+                                <h3>Em Andamento</h3>
+                                <span class="kanban-count" id="kanban-doing-count">0</span>
+                            </div>
+                            <div class="kanban-cards" id="kanban-doing" ondrop="handleKanbanDrop(event, 'doing')" ondragover="handleKanbanDragOver(event)"></div>
+                        </div>
+                        <div class="kanban-column" data-status="done">
+                            <div class="kanban-column-header">
+                                <h3>Concluídas</h3>
+                                <span class="kanban-count" id="kanban-done-count">0</span>
+                            </div>
+                            <div class="kanban-cards" id="kanban-done" ondrop="handleKanbanDrop(event, 'done')" ondragover="handleKanbanDragOver(event)"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calendar View -->
+                <div id="view-calendar" class="goal-view">
+                    <div class="calendar-header">
+                        <button class="btn btn-icon-only" onclick="changeCalendarMonth(-1)">◀</button>
+                        <h3 id="calendar-month-label"></h3>
+                        <button class="btn btn-icon-only" onclick="changeCalendarMonth(1)">▶</button>
+                    </div>
+                    <div class="calendar-grid" id="calendar-grid"></div>
+                </div>
+
+                <!-- Empty state -->
+                <div class="empty-state" id="goals-empty" style="display:none">
+                    <div class="empty-icon">🎯</div>
+                    <h3>Nenhuma meta ainda!</h3>
+                    <p>Comece adicionando sua primeira meta ou explore nossas sugestões.</p>
+                    <div class="empty-actions">
+                        <button class="btn btn-primary" onclick="openGoalModal()">+ Nova Meta</button>
+                        <button class="btn btn-outline" onclick="navigateTo('suggestions')">Ver Sugestões</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== SUGGESTIONS ===== -->
+            <section id="section-suggestions" class="content-section">
+                <div class="section-header">
+                    <h2>Sugestões de Metas</h2>
+                    <p>Inspire-se com essas ideias para o casal!</p>
+                </div>
+                <div class="suggestions-toolbar">
+                    <select id="suggestion-category-filter" onchange="filterSuggestions()">
+                        <option value="">Todas as categorias</option>
+                    </select>
+                    <button class="btn btn-secondary btn-surprise" onclick="surpriseMe()">
+                        🎲 Me Surpreenda!
+                    </button>
+                </div>
+                <div class="suggestion-grid" id="suggestion-grid"></div>
+            </section>
+
+            <!-- ===== ACHIEVEMENTS ===== -->
+            <section id="section-achievements" class="content-section">
+                <div class="section-header">
+                    <h2>Conquistas</h2>
+                    <p>Seus troféus como casal!</p>
+                </div>
+                <div class="achievements-grid" id="achievements-grid"></div>
+            </section>
+
+            <!-- ===== SETTINGS ===== -->
+            <section id="section-settings" class="content-section">
+                <div class="section-header">
+                    <h2>Configurações</h2>
+                </div>
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h3>Perfil do Casal</h3>
+                        <div class="settings-avatar-section">
+                            <div class="settings-avatar" id="settings-avatar">
+                                <span id="settings-avatar-text">💑</span>
+                            </div>
+                            <input type="file" id="avatar-upload" accept="image/*" onchange="handleAvatarUpload(event)" style="display:none">
+                            <button class="btn btn-sm btn-outline" onclick="document.getElementById('avatar-upload').click()">Alterar Foto</button>
+                        </div>
+                        <div class="form-group">
+                            <label for="couple-name">Nome do Casal</label>
+                            <input type="text" id="couple-name" placeholder="Ex: João & Maria">
+                        </div>
+                        <div class="form-group">
+                            <label for="anniversary-date">Data de Aniversário</label>
+                            <input type="date" id="anniversary-date">
+                        </div>
+                        <button class="btn btn-primary" onclick="saveCoupleSettings()">Salvar</button>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Aparência</h3>
+                        <div class="theme-toggle-setting">
+                            <span>Tema</span>
+                            <div class="theme-switch">
+                                <button class="theme-btn active" data-theme="light" onclick="setTheme('light')">☀️ Claro</button>
+                                <button class="theme-btn" data-theme="dark" onclick="setTheme('dark')">🌙 Escuro</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Código de Convite</h3>
+                        <p class="settings-description" id="partner-status"></p>
+                        <div class="invite-code-display" id="settings-invite-code" style="display:none">
+                            <span id="settings-invite-text"></span>
+                            <button class="btn btn-icon-only" onclick="copyInviteCode()" title="Copiar">📋</button>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Categorias Personalizadas</h3>
+                        <p class="settings-description">Crie até 5 categorias personalizadas.</p>
+                        <div id="custom-categories-list"></div>
+                        <div class="form-group form-inline" id="add-category-form">
+                            <input type="text" id="new-category-name" placeholder="Nome da categoria" maxlength="20">
+                            <input type="color" id="new-category-color" value="#6366f1">
+                            <button class="btn btn-sm btn-primary" onclick="addCustomCategory()">Adicionar</button>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Conta</h3>
+                        <div class="form-group">
+                            <label for="change-password">Nova Senha</label>
+                            <input type="password" id="change-password" placeholder="Nova senha">
+                        </div>
+                        <div class="form-group">
+                            <label for="change-password-confirm">Confirmar Nova Senha</label>
+                            <input type="password" id="change-password-confirm" placeholder="Confirmar nova senha">
+                        </div>
+                        <button class="btn btn-primary" onclick="changePassword()">Alterar Senha</button>
+                        <hr>
+                        <button class="btn btn-danger" onclick="deleteAccount()">Excluir Conta</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ==================== MODALS ==================== -->
+    <!-- Goal Modal -->
+    <div class="modal-overlay" id="goal-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="goal-modal-title">Nova Meta</h3>
+                <button class="btn btn-icon-only" onclick="closeGoalModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="goal-edit-id">
+                <div class="form-group">
+                    <label for="goal-title">Título *</label>
+                    <input type="text" id="goal-title" placeholder="O que vocês querem fazer?" required>
+                </div>
+                <div class="form-group">
+                    <label for="goal-description">Descrição</label>
+                    <textarea id="goal-description" placeholder="Mais detalhes sobre esta meta..." rows="3"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="goal-category">Categoria</label>
+                        <select id="goal-category"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="goal-responsible">Responsável</label>
+                        <select id="goal-responsible">
+                            <option value="nos">Nós</option>
+                            <option value="ele">Ele</option>
+                            <option value="ela">Ela</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="goal-quantity">Quantidade</label>
+                        <input type="number" id="goal-quantity" value="1" min="1" max="999">
+                    </div>
+                    <div class="form-group">
+                        <label for="goal-target-date">Data-Alvo</label>
+                        <input type="date" id="goal-target-date">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeGoalModal()">Cancelar</button>
+                <button class="btn btn-primary" onclick="saveGoal()">Salvar Meta</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Goal Detail Modal -->
+    <div class="modal-overlay" id="goal-detail-modal">
+        <div class="modal modal-detail">
+            <div class="modal-header">
+                <h3 id="detail-title">Meta</h3>
+                <button class="btn btn-icon-only" onclick="closeDetailModal()">✕</button>
+            </div>
+            <div class="modal-body" id="detail-body"></div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closeDetailModal()">Fechar</button>
+                <button class="btn btn-secondary" id="detail-edit-btn" onclick="editGoalFromDetail()">Editar</button>
+                <button class="btn btn-danger" id="detail-delete-btn" onclick="deleteGoalFromDetail()">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Level Up Celebration -->
+    <div class="celebration-overlay" id="celebration-overlay">
+        <div class="celebration-content">
+            <div class="celebration-icon">🎉</div>
+            <h2 id="celebration-title">Parabéns!</h2>
+            <p id="celebration-message"></p>
+            <button class="btn btn-primary" onclick="closeCelebration()">Obrigado!</button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
